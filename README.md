@@ -4,7 +4,7 @@ My implement of `Rethinking Feature Distribution for Loss Functions in Image Cla
 
 ## Some Details
 
-- In original paper, the L-GM-loss was formulated as $L_{GM} = L_{cls} + \lambda L_{lkd}$，where the regularization term $L_{lkd} = d_{z_{i}} + \frac{1}{2}log|\Lambda_{z_{i}}|$. But when i implement it i find that it's pretty hard to optimize this term beacuse the loss also lead to a small variance(much smaller than a identity matrix), so $\frac{1}{2}log|\Lambda_{z_{i}}|$ will decrease to **-inf** after several iterations and also make the loss **Nan**. I tried 2 ways to cover this problem 
+- In original paper, the L-GM-loss was formulated as $L_{GM} = L_{cls} + \lambda L_{lkd}$, where the regularization term $L_{lkd} = d_{z_{i}} + \frac{1}{2}log|\Lambda_{z_{i}}|$. But when i implement it i find that it's pretty hard to optimize this term beacuse the loss also lead to a small variance(much smaller than a identity matrix), so $\frac{1}{2}log|\Lambda_{z_{i}}|$ will decrease to **-inf** after several iterations and also make the loss **Nan**. I tried 2 ways to cover this problem 
 
   > 1. Remove the regularization term and only optimize the classification loss
   > 2. Remove the $\frac{1}{2}log|\Lambda_{z_{i}}|$ and keep the regularization term
