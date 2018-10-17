@@ -7,14 +7,14 @@ from mxnet import gluon, autograd
 
 
 class L_GM_Loss(gluon.nn.HybridBlock):
-    def __init__(self, num_class, feature_dim, alpha, lamda, **kwargs):
+    def __init__(self, num_class, feature_dim, alpha, lamda, lr_mult, **kwargs):
         super(L_GM_Loss, self).__init__(**kwargs)
         self._num_class = num_class
         self._feature_dim = feature_dim
         self._alpha = alpha
         self._lamda = lamda
         self.mean = self.params.get('mean', shape=(num_class, feature_dim), init=mx.init.Xavier())
-        self.var = self.params.get('var', shape=(num_class, feature_dim), init=mx.init.Constant(1))   
+        self.var = self.params.get('var', shape=(num_class, feature_dim), init=mx.init.Constant(1), lr_mult=lr_mult)   
     def _classification_probability(self, F, x, y, mean, var):
         batch_size = x.shape[0]
         reshape_var = F.reshape(var, (-1, 1, self._feature_dim))
