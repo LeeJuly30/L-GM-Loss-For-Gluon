@@ -30,6 +30,9 @@ i set the $\alpha$ to 0.1, you can see the clear margin between classes, but som
 still suffering from the variance problem :cry: 
 
 the author released code is written in `caffe` and `cuda`, you can find it in [here](https://github.com/WeitaoVan/L-GM-loss)
+## Update
+By adding a lr_mult term to the variance(set a low learning rate) i fixed the problem, here is the result.
+<img src="image/fix.png"></img>
 
 
 
