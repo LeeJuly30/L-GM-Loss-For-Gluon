@@ -30,7 +30,7 @@ def train():
     model = LeNetPlus()
     model.hybridize()
     model.initialize(mx.init.Xavier(magnitude=2.24), ctx=ctx)
-    L_Gm = L_GM_Loss(10,2,arg.margin, arg.lamda)
+    L_Gm = L_GM_Loss(10,2,arg.margin, arg.lamda, arg.mult)
     L_Gm.initialize(mx.init.Xavier(), ctx=ctx)
     train_iter = mx.gluon.data.DataLoader(mnist_set, 250, shuffle=True)
     test_iter = mx.gluon.data.DataLoader(test_mnist_set, 500, shuffle=False)
@@ -57,5 +57,6 @@ if __name__ == '__main__':
     # File related
     parser.add_argument('--magrin', default=0.1, type=float, help='margin in l-gm loss')
     parser.add_argument('--lamda', default=0.2, type=float, help='weight of likelihood loss')
+    parser.add_argument('--mult', default=0.06, type=float, help='lr mult in variance update')
     arg = parser.parse_args()
     train()
